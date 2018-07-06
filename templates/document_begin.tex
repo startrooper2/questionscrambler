@@ -1,0 +1,67 @@
+\documentclass[12pt,onside,a4paper,article]{memoir}
+\title{Example Document}
+% \author{Don Marvillo}
+
+\usepackage{amsmath, amssymb, amsthm, mathrsfs}
+\usepackage[pdftex]{graphicx,color}
+\usepackage[ngerman]{babel} 
+\usepackage{nicefrac}
+\usepackage{algorithm,algorithmicx,algpseudocode,MnSymbol} 
+\usepackage{framed}\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+\usepackage[utf8]{inputenc} % set input encoding to utf8
+\usepackage{afterpage}
+\usepackage[margin=2cm,bmargin=5cm]{geometry}
+
+\graphicspath{{/home/adi/Dokumente/Unterricht/Physiologie/Media/}}
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+% front matter %
+\begin{document}
+
+\title{Prüfung \protect\\ 
+in Physiologie}
+\date{16. Juli 2018}
+\maketitle
+
+\begin{shaded}
+Name: 
+\end{shaded}
+
+Es sind keinerlei Vorlesungsunterlagen zugelassen. Wenn Sie eine Frage nicht verstehen, geben Sie ein Handzeichen und fragen Sie die Aufsichtsperson.\\
+Die Prüfungsdauer beträgt 90 Minuten.
+
+\begin{center}
+
+\begin{tabular}{lc}
+PAKE &  \hspace*{1cm}/4,0 Pkt.
+\\
+SSO und Kerberos   & \hspace*{1cm}/4,5 Pkt.
+\\
+TLS   & \hspace*{1cm}/5,5 Pkt.
+\\
+Bitcoin &  \hspace*{1cm}/5,0 Pkt.
+\\\hline
+Gesamt &  \hspace*{1cm}/19,0 Pkt.
+\end{tabular}
+
+\vspace*{0.5cm}
+\input{Notenschluessel.tex}
+\end{center}
+
+\newpage
+%\pagestyle{empty}
+% \setlength{\parskip}{5mm}
+
+\begin{enumerate}\itemsep30mm
+
+
+% set the page numbers to be arabic, starting at page 1 %
+\pagenumbering{arabic}
+%\setcounter{page}{300}
+
+
