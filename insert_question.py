@@ -11,23 +11,23 @@ def copytemplate(input,output):
 def insert(ques):
     with open( outputdir + 'automated.tex' , 'a') as mytexfile:
         for item in ques:
-            print(item)
+           # print(item)
             mytexfile.write(item)
 
 if __name__ == "__main__":
     copytemplate(templatedir + 'document_begin.tex', outputdir + 'automated.tex')
 
-    content = r''' \item{Welches Molekül sehen sie hier? Wofür braucht es der Körper?}
+    content = r''' \item{Which continent do you live in?}
     \begin{flushright}
     \scalebox{1.7}{
     \begin{tabular}{|m{0.5cm}|m{0.5cm}|}
 	\hline
-    90 &  23 \\
+    90 &  \\
 	\hline
 	\end{tabular}}
     \end{flushright}
     \begin{flushleft}
-    \includegraphics[height=5cm]{Adenosintriphosphat.jpg}
+    \includegraphics[height=5cm]{europe.jpg}
     \end{flushleft}
     '''
     insert(content)
