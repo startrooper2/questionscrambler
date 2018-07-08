@@ -61,30 +61,40 @@ def mixer(liste):
 
 if __name__ == "__main__":
 
+   # count = input('Tell me how many Tests you would like to generate\n')
+
+
     questionlist,totalpoints = readfile()
     print('Totalpoints = ' + str(totalpoints))
-    scrambledlist = mixer(questionlist)
+    list_to_scramble = questionlist.copy()
+    scrambledlist = mixer(list_to_scramble)
+    # print(questionlist)
 
     copytemplate(templatedir + 'document_begin.tex', outputdir + 'automated.tex')
 
-    for questionanwer in scrambledlist:
-        question = "\item{%s}\n\\begin{flushright}\n" \
-                   "\\scalebox{1.7}{\n" \
-                   "\\begin{tabular}{|m{0.5cm}|m{0.5cm}|}\n" \
-                   "\\hline\n" \
-                   "\ %s &  \\\ \n " \
-                   "\\hline\n" \
-                   "\\end{tabular}}\n" \
-                   "\\end{flushright}\n" % (questionanwer.question, questionanwer.points)
+    for x in range(0,3):
+        list_to_scramble = questionlist.copy()
+        scrambledlist = mixer(list_to_scramble)
+        insert("\\begin{enumerate}\n\n")
+        for questionanwer in scrambledlist:
+            question = "\item{%s}\n\\begin{flushright}\n" \
+                       "\\scalebox{1.7}{\n" \
+                       "\\begin{tabular}{|m{0.5cm}|m{0.5cm}|}\n" \
+                       "\\hline\n" \
+                       "\ %s &  \\\ \n " \
+                       "\\hline\n" \
+                       "\\end{tabular}}\n" \
+                       "\\end{flushright}\n" % (questionanwer.question, questionanwer.points)
 
-        if questionanwer.pic is not None:
-            question = question +\
-                       "\\begin{flushleft}\n" \
-                       "\includegraphics[height=5cm]{europe.jpg}\n" \
-                       "\end{flushleft}\n"\
-        insert(question)
-
+            if questionanwer.pic is not None:
+                question = question +\
+                           "\\begin{flushleft}\n" \
+                           "\includegraphics[height=5cm]{europe.jpg}\n" \
+                           "\end{flushleft}\n"
+            insert(question)
+        insert("\\end{enumerate}\n\n")
         # testseperator
-        insert('\\afterpage{\\blankpage}')
+
+        copytemplate(templatedir + 'next_test.tex', outputdir + 'automated.tex')
 
     copytemplate(templatedir + 'document_end.tex', outputdir + 'automated.tex')
