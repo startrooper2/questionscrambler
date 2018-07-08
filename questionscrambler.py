@@ -1,3 +1,5 @@
+from random import randint
+
 templatedir = './templates/'
 outputdir = './output/'
 questiondir = './'
@@ -16,6 +18,7 @@ def readfile():
         content = originalfile.read()
         blocks = content.split('\n\n')
         questionlist = []
+        totalpoints = 0
         for part in blocks:
             obj = FrageAntwort()
             for line in part.split('\n'):
@@ -27,8 +30,9 @@ def readfile():
                     obj.pic = line[3:]
                 elif line.startswith('P: '):
                     obj.points = line[3:]
+                    totalpoints += int(obj.points)
             questionlist.append(obj)
-        return questionlist
+        return questionlist, totalpoints
 
 
 def copytemplate(input, output):
@@ -45,13 +49,25 @@ def insert(ques):
             #  print(item)
             mytexfile.write(item)
 
+def mixer(liste):
+    scrambled = []
+    while len(liste) > 0:
+        ind = randint(0, len(liste) - 1)
+       # print(ind)
+        scrambled.append(liste[ind])
+        del liste[ind]
+    return scrambled
+
 
 if __name__ == "__main__":
-    questionlist = readfile()
+
+    questionlist,totalpoints = readfile()
+    print('Totalpoints = ' + str(totalpoints))
+    scrambledlist = mixer(questionlist)
 
     copytemplate(templatedir + 'document_begin.tex', outputdir + 'automated.tex')
 
-    for questionanwer in questionlist:
+    for questionanwer in scrambledlist:
         question = "\item{%s}\n\\begin{flushright}\n" \
                    "\\scalebox{1.7}{\n" \
                    "\\begin{tabular}{|m{0.5cm}|m{0.5cm}|}\n" \
@@ -61,11 +77,14 @@ if __name__ == "__main__":
                    "\\end{tabular}}\n" \
                    "\\end{flushright}\n" % (questionanwer.question, questionanwer.points)
 
-        #              "\\begin{flushleft}\n" \
-        #             "\includegraphics[height=5cm]{europe.jpg}\n" \
-        #            "\end{flushleft}\n"\
-
-        # print(questionlist[3].points)
+        if questionanwer.pic is not None:
+            question = question +\
+                       "\\begin{flushleft}\n" \
+                       "\includegraphics[height=5cm]{europe.jpg}\n" \
+                       "\end{flushleft}\n"\
         insert(question)
+
+        # testseperator
+        insert('\\afterpage{\\blankpage}')
 
     copytemplate(templatedir + 'document_end.tex', outputdir + 'automated.tex')
