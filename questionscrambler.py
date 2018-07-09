@@ -75,7 +75,7 @@ if __name__ == "__main__":
     for x in range(0,3):
         list_to_scramble = questionlist.copy()
         scrambledlist = mixer(list_to_scramble)
-        insert("\\begin{enumerate}\n\n")
+        insert("\\begin{enumerate}\n\\setcounter{page}{1}\n\n")
         for questionanwer in scrambledlist:
             question = "\item{%s}\n\\begin{flushright}\n" \
                        "\\scalebox{1.7}{\n" \
@@ -90,7 +90,8 @@ if __name__ == "__main__":
                 question = question +\
                            "\\begin{flushleft}\n" \
                            "\includegraphics[height=5cm]{europe.jpg}\n" \
-                           "\end{flushleft}\n"
+                           "\end{flushleft}\n" \
+                           "\\vspace{5cm}\n\n"
             insert(question)
         insert("\\end{enumerate}\n\n")
         # testseperator
